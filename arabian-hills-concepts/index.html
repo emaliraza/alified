@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arabian Hills Developers — Design Concepts</title>
+<meta name="description" content="Three website design directions for Arabian Hills Developers, prepared for executive selection.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F4F1EB">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2317140F'/%3E%3Cpath d='M18 52V28c0-9 6-16 14-19 8 3 14 10 14 19v24' fill='none' stroke='%23C6A15B' stroke-width='3'/%3E%3C/svg%3E">
+
+<!-- ============================================================
+     LAUNCHER — presents the three concepts side by side with a
+     comparison table. Neutral styling so it never competes with
+     the concepts themselves. No libraries required.
+     ============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;1,400&family=Space+Grotesk:wght@500&family=Cinzel:wght@400&display=swap">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>if (window.tailwind) tailwind.config = { corePlugins: { preflight: false } };</script>
+
+<style>
+:root{
+  --bg:#F4F1EB; --paper:#FBFAF7; --ink:#17140F; --ink-2:#4A453D; --muted:#6F695F; --line:rgba(23,20,15,.12);
+  --accent:#9C7A3C; --accent-soft:#C6A15B;
+  --serif:'Instrument Serif',Georgia,serif; --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{width:100%;max-width:1320px;margin-inline:auto;padding-inline:clamp(20px,4vw,48px)}
+.micro{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+/* Top bar */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px;border-bottom:1px solid var(--line)}
+.top__brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:14px}
+.top__brand svg{width:22px;height:26px;color:var(--accent)}
+.top__brand span{color:var(--muted);font-weight:400}
+.pill{display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;border:1px solid var(--line);border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);background:var(--paper)}
+.pill i{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+/* Intro */
+.intro{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:end;padding:clamp(56px,8vw,112px) 0 clamp(40px,5vw,64px)}
+.intro h1{font-family:var(--serif);font-weight:400;font-size:clamp(44px,6.4vw,96px);line-height:.98;letter-spacing:-.02em}
+.intro h1 em{font-style:italic;color:var(--accent)}
+.intro p{font-size:17px;color:var(--ink-2);max-width:46ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.facts span{height:30px;display:inline-flex;align-items:center;padding:0 12px;border-radius:999px;background:rgba(23,20,15,.05);font-size:12.5px;color:var(--ink-2)}
+
+/* Concept cards */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.card{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:transform .6s var(--ease),box-shadow .6s var(--ease),border-color .4s}
+.card:hover{transform:translateY(-6px);box-shadow:0 40px 80px -40px rgba(23,20,15,.35);border-color:rgba(23,20,15,.22)}
+.prev{position:relative;display:block;aspect-ratio:16/10.5;overflow:hidden;isolation:isolate}
+.prev>*{transition:transform 1.2s var(--ease)}
+.card:hover .prev .pv-in{transform:scale(1.04)}
+.pv-in{position:absolute;inset:0}
+.prev__tag{position:absolute;left:14px;bottom:14px;z-index:3;height:24px;display:inline-flex;align-items:center;padding:0 10px;border-radius:999px;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;background:rgba(255,255,255,.88);color:var(--ink)}
+.card__body{display:flex;flex-direction:column;flex:1;padding:28px 28px 28px}
+.card__num{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--accent)}
+.card h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,2.6vw,38px);line-height:1.05;margin:4px 0 10px}
+.card .pos{font-size:15px;color:var(--ink-2)}
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:24px 0 20px}
+.sw{display:flex;flex-direction:column;gap:6px}
+.sw i{display:block;height:44px;border-radius:8px;border:1px solid rgba(23,20,15,.1);transition:transform .4s var(--ease)}
+.sw:hover i{transform:translateY(-3px)}
+.sw b{font-size:11px;font-weight:600}
+.sw small{font-size:10.5px;color:var(--muted);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.type{display:flex;align-items:baseline;gap:14px;padding:16px 0;border-block:1px solid var(--line)}
+.type .aa{font-size:40px;line-height:1}
+.type p{font-size:13px;color:var(--ink-2);line-height:1.5}
+.feats{margin:18px 0 24px;display:grid;gap:8px}
+.feats li{position:relative;padding-left:20px;font-size:14px;color:var(--ink-2)}
+.feats li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:1px;background:var(--accent)}
+.card__foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.go{position:relative;display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 22px;border-radius:999px;background:var(--ink);color:#fff;font-size:13.5px;font-weight:500;overflow:hidden;isolation:isolate;transition:color .4s}
+.go::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--c,var(--accent));transform:translateY(101%);transition:transform .5s var(--ease)}
+.go:hover::before{transform:none}
+.go:hover{color:var(--ct,#fff)}
+.go .arr{transition:transform .5s var(--ease)}
+.go:hover .arr{transform:translateX(4px)}
+.kbd{font-size:12px;color:var(--muted)}
+.kbd kbd{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;margin-right:4px;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;font-family:var(--sans);font-size:11px;font-weight:600;color:var(--ink);background:#fff}
+
+/* ---------- Mini previews (pure CSS/SVG impressions of each concept) ---------- */
+/* C1 */
+.pv1{background:#F7F3EC}
+.pv1 .hero{position:absolute;left:0;right:0;top:0;height:64%;background:linear-gradient(180deg,rgba(43,33,24,.7),rgba(43,33,24,.92)),linear-gradient(160deg,#5E4630,#2B2118);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#F7F3EC}
+.pv1 .hero svg.sky{position:absolute;left:0;right:0;bottom:0;width:100%;opacity:.55}
+.pv1 .nav{position:absolute;left:8%;right:8%;top:8%;display:flex;justify-content:space-between;align-items:center;font-size:7px;letter-spacing:.2em;color:#D9C7A7}
+.pv1 .nav b{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:9px;letter-spacing:.3em;color:#F7F3EC}
+.pv1 h3{position:relative;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(17px,2vw,26px);line-height:1}
+.pv1 h3 em{color:#CDB386}
+.pv1 .btn{position:relative;margin-top:10px;width:58px;height:12px;background:#B08D57}
+.pv1 .arches{position:absolute;left:10%;right:10%;bottom:8%;display:flex;gap:6%;align-items:flex-end}
+.pv1 .arches i{flex:1;height:44px;border-radius:99px 99px 0 0;background:linear-gradient(160deg,#E4D5BA,#A98B5F);outline:1px solid rgba(176,141,87,.4);outline-offset:3px}
+.pv1 .arches i:nth-child(2){height:56px}
+.pv1 .rail{position:absolute;left:3.5%;top:30%;height:40%;width:1px;background:linear-gradient(#B08D57 60%,rgba(176,141,87,.25) 60%)}
+/* C2 */
+.pv2{background:#141414;color:#F2EFE9;font-family:'Space Grotesk',sans-serif}
+.pv2 .t{position:absolute;left:7%;top:24%;z-index:2;font-weight:500;font-size:clamp(26px,3.3vw,44px);line-height:.86;letter-spacing:-.05em}
+.pv2 .t span{display:block}
+.pv2 .t .o{color:transparent;-webkit-text-stroke:1px #F2EFE9;padding-left:16%}
+.pv2 .t .d{color:#C9A961}
+.pv2 svg{position:absolute;right:4%;top:6%;height:88%}
+.pv2 .strip{position:absolute;left:0;right:0;bottom:0;height:13%;border-top:1px solid rgba(242,239,233,.14)}
+.pv2 .cur{position:absolute;left:62%;top:58%;z-index:3;width:18px;height:18px;border:1px solid #C9A961;border-radius:50%}
+.pv2 .cur::after{content:"";position:absolute;left:50%;top:50%;width:4px;height:4px;margin:-2px;border-radius:50%;background:#C9A961}
+/* C3 */
+.pv3{background:radial-gradient(80% 70% at 50% 100%,#13253F,#0A1628 70%);color:#E8DCC4}
+.pv3 svg{position:absolute;left:0;right:0;bottom:0;width:100%;height:100%}
+.pv3 .t{position:absolute;left:0;right:0;top:16%;z-index:2;text-align:center;font-family:'Cinzel',serif;font-size:clamp(20px,2.4vw,32px);letter-spacing:.1em;background:linear-gradient(100deg,#8C6D1F,#D4AF37 30%,#F6E7B0 50%,#D4AF37 70%,#9C7A1E);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pv3 .t small{display:block;margin-top:6px;font-family:var(--sans);font-size:6.5px;letter-spacing:.4em;color:#E8DCC4;-webkit-text-fill-color:#E8DCC4}
+.pv3 .jb{position:absolute;left:36%;right:12%;bottom:7%;z-index:2;height:16px;border-radius:99px;border:1px solid rgba(212,175,55,.35);background:rgba(6,16,30,.7);display:flex;align-items:center;justify-content:space-between;padding:0 8px}
+.pv3 .jb::before{content:"";position:absolute;left:10px;right:10px;top:50%;height:1px;background:linear-gradient(90deg,#D4AF37 45%,rgba(232,220,196,.2) 45%)}
+.pv3 .jb i{position:relative;width:6px;height:6px;border-radius:50%;border:1px solid rgba(232,220,196,.4);background:#0A1628}
+.pv3 .jb i.on{background:#D4AF37;border-color:#D4AF37;box-shadow:0 0 6px #D4AF37}
+
+/* Comparison */
+.sec{padding:clamp(80px,10vw,136px) 0 0}
+.sec__h{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:24px;margin-bottom:32px}
+.sec__h h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4vw,56px);line-height:1}
+.sec__h p{color:var(--muted);max-width:52ch;font-size:15px}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--paper);-webkit-overflow-scrolling:touch}
+table{width:100%;min-width:860px;border-collapse:collapse;font-size:14.5px}
+th,td{padding:18px 22px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+thead th{position:sticky;top:0;background:var(--paper);font-weight:500;font-size:13px;padding-top:22px;padding-bottom:22px}
+thead th .n{display:block;font-family:var(--serif);font-style:italic;font-size:15px;color:var(--accent)}
+thead th b{font-family:var(--serif);font-weight:400;font-size:22px}
+tbody th{width:15%;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-top:21px}
+tbody td{width:28.33%;color:var(--ink-2)}
+tbody tr{transition:background-color .3s}
+tbody tr:hover{background:rgba(156,122,60,.05)}
+.chips{display:flex;gap:4px;margin-bottom:6px}
+.chips i{width:16px;height:16px;border-radius:4px;border:1px solid rgba(23,20,15,.12)}
+.meter{display:flex;gap:4px;margin-bottom:8px}
+.meter i{width:18px;height:6px;border-radius:3px;background:rgba(23,20,15,.1)}
+.meter i.on{background:var(--accent)}
+.ff1{font-family:'Cormorant Garamond',serif;font-size:19px;color:var(--ink)}
+.ff2{font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:16px;color:var(--ink)}
+.ff3{font-family:'Cinzel',serif;font-size:15px;color:var(--ink)}
+
+/* Presenter notes */
+.notes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.note{padding:24px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.note b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:22px;color:var(--accent)}
+.note h3{font-size:15px;font-weight:600;margin:8px 0 6px}
+.note p{font-size:14px;color:var(--ink-2)}
+.note code{font-size:12.5px;padding:1px 6px;border-radius:4px;background:rgba(23,20,15,.06)}
+
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;margin-top:clamp(80px,10vw,120px);padding:28px 0 40px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.foot .m{font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-size:11px}
+
+/* Entrance */
+.rise{opacity:0;transform:translateY(24px);animation:rise 1s var(--ease) forwards;animation-delay:var(--d,0s)}
+@keyframes rise{to{opacity:1;transform:none}}
+
+@media (max-width:1060px){
+  .cards{grid-template-columns:1fr;max-width:640px;margin-inline:auto}
+  .intro{grid-template-columns:1fr;gap:24px}
+  .notes{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .top .pill{display:none}
+  .notes{grid-template-columns:1fr}
+  .card__foot{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){.rise{animation:none;opacity:1;transform:none}*{transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="top__brand">
+      <svg viewBox="0 0 40 48" aria-hidden="true"><path d="M4 46.5V20C4 11 11 5 20 1.5 29 5 36 11 36 20v26.5M8.5 40.5c4-7.5 7.5-8.5 11-3.2 3.5-5.3 7.5-4.3 12 3.2M1 46.5h38" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+      Arabian Hills Developers <span>/ Website design review</span>
+    </div>
+    <span class="pill"><i></i>Mockup — For design selection only</span>
+  </header>
+
+  <section class="intro">
+    <div class="rise">
+      <p class="micro">Homepage direction · November 2026</p>
+      <h1 style="margin-top:16px">Arabian Hills Developers — <em>Design Concepts</em></h1>
+    </div>
+    <div class="rise" style="--d:.15s">
+      <p>Three distinct creative directions for the new corporate website. Each is a complete homepage: hero, about, services, featured projects, proof points and contact. Review all three, then select one to take into full design and development.</p>
+      <div class="facts"><span>3 concepts</span><span>Fully responsive</span><span>Live motion &amp; 3D</span><span>Real copy, placeholder imagery</span></div>
+    </div>
+  </section>
+
+  <!-- ===================== CONCEPT CARDS ===================== -->
+  <section class="cards" aria-label="Concepts">
+    <!-- 01 -->
+    <article class="card rise" style="--d:.25s">
+      <a class="prev" href="concept1.html" aria-label="Open Concept 1 — The Heritage Atelier">
+        <span class="prev__tag">Classic · Timeless</span>
+        <div class="pv-in pv1" aria-hidden="true">
+          <div class="hero">
+            <svg class="sky" viewBox="0 0 400 80" preserveAspectRatio="none"><path fill="#1d160f" d="M0 80V52h18V40h12v12h10V30h14v-8h8v30h12V20l8-10 8 10v32h10V44h14v8h8V8l3-8 3 8v44h12V34h18v18h10V28h14v24h10V40h14v12h12V26l8-8 8 8v26h14V44h16v8h12V36h14v16h12V48h18v32z"/></svg>
+            <div class="nav"><span>ABOUT · SERVICES</span><b>ARABIAN HILLS</b><span>CONTACT</span></div>
+            <h3>Crafting Distinctive<br><em>Living &amp; Commercial</em> Spaces</h3>
+            <span class="btn"></span>
+          </div>
+          <span class="rail"></span>
+          <div class="arches"><i></i><i></i><i></i></div>
+        </div>
+      </a>
+      <div class="card__body">
+        <span class="card__num">Concept 01</span>
+        <h2>The Heritage Atelier</h2>
+        <p class="pos">A London / Dubai property brochure come to life — established, trustworthy, heritage luxury. The Savile Row tailor of real estate.</p>
+        <div class="swatches">
+          <div class="sw"><i style="background:#F7F3EC"></i><b>Ivory</b><small>#F7F3EC</small></div>
+          <div class="sw"><i style="background:#B08D57"></i><b>Bronze Gold</b><small>#B08D57</small></div>
+          <div class="sw"><i style="background:#2B2118"></i><b>Espresso</b><small>#2B2118</small></div>
+          <div class="sw"><i style="background:#D9C7A7"></i><b>Warm Sand</b><small>#D9C7A7</small></div>
+        </div>
+        <div class="type"><span class="aa" style="font-family:'Cormorant Garamond',serif;font-weight:300">Aa</span><p><b>Cormorant Garamond</b> display, italic accents<br>Jost for body &amp; tracked labels</p></div>
+        <ul class="feats">
+          <li>Symmetrical editorial layout, numbered sections 01–05</li>
+          <li>Ken Burns hero, slow parallax, fade-up reveals</li>
+          <li>Arched image triptych &amp; staggered project grid</li>
+          <li>Signature: vertical gold scroll-progress rail</li>
+        </ul>
+        <div class="card__foot">
+          <a class="go" href="concept1.html" style="--c:#B08D57;--ct:#2B2118">View Concept <span class="arr">→</span></a>
+          <span class="kbd"><kbd>1</kbd>shortcut</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 -->
+    <article class="card rise" style="--d:.35s">
+      <a class="prev" href="concept2.html" aria-label="Open Concept 2 — The Contemporary Edge">
+        <span class="prev__tag">Modern · Minimal</span>
+        <div class="pv-in pv2" aria-hidden="true">
+          <svg viewBox="0 0 120 200" fill="none" stroke="#C9A961" stroke-width=".7">
+            <path d="M20 190h80M30 182h60v8H30z" opacity=".6"/>
+            <path d="M44 182 50 30M76 182 70 30M44 182 76 182M50 30h20" />
+            <path d="M44 170h32M45 158h30M45.5 146h29M46 134h28M46.5 122h27M47 110h26M47.5 98h25M48 86h24M48.5 74h23M49 62h22M49.5 50h21M50 40h20" opacity=".45"/>
+            <path d="M44 182 70 120 50 60M76 182 50 120 70 60" opacity=".5"/>
+            <path d="M60 30V8"/>
+            <path d="M14 182h18v-60H14zM14 170h18M14 158h18M14 146h18M14 134h18" opacity=".3"/>
+          </svg>
+          <div class="t"><span>Crafting</span><span class="o">Distinctive</span><span>Spaces<span class="d">.</span></span></div>
+          <span class="cur"></span>
+          <div class="strip"></div>
+        </div>
+      </a>
+      <div class="card__body">
+        <span class="card__num">Concept 02</span>
+        <h2>The Contemporary Edge</h2>
+        <p class="pos">A world-class architecture-firm presence — bold, spacious, confident and design-forward, in the spirit of Foster + Partners and BIG.</p>
+        <div class="swatches">
+          <div class="sw"><i style="background:#141414"></i><b>Charcoal</b><small>#141414</small></div>
+          <div class="sw"><i style="background:#F2EFE9"></i><b>Off-White</b><small>#F2EFE9</small></div>
+          <div class="sw"><i style="background:#C9A961"></i><b>Champagne</b><small>#C9A961</small></div>
+          <div class="sw"><i style="background:#8A8A8A"></i><b>Cool Grey</b><small>#8A8A8A</small></div>
+        </div>
+        <div class="type"><span class="aa" style="font-family:'Space Grotesk',sans-serif;font-weight:500;letter-spacing:-.04em">Aa</span><p><b>Space Grotesk</b> oversized display<br>Inter for body &amp; micro-labels</p></div>
+        <ul class="feats">
+          <li>Asymmetric 12-column grid with sticky section labels</li>
+          <li>Hero: self-drawing 3D wireframe tower (Three.js)</li>
+          <li>Text mask reveals, Lenis smooth scroll, drag gallery</li>
+          <li>Signature: custom gold cursor with contextual labels</li>
+        </ul>
+        <div class="card__foot">
+          <a class="go" href="concept2.html" style="--c:#C9A961;--ct:#141414">View Concept <span class="arr">→</span></a>
+          <span class="kbd"><kbd>2</kbd>shortcut</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 -->
+    <article class="card rise" style="--d:.45s">
+      <a class="prev" href="concept3.html" aria-label="Open Concept 3 — The Cinematic Journey">
+        <span class="prev__tag">Immersive · 3D</span>
+        <div class="pv-in pv3" aria-hidden="true">
+          <svg viewBox="0 0 400 262" preserveAspectRatio="xMidYMax slice">
+            <defs><radialGradient id="g3" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#F6E7B0" stop-opacity=".8"/><stop offset="1" stop-color="#D4AF37" stop-opacity="0"/></radialGradient></defs>
+            <path d="M0 230h400" stroke="#1A3A4A"/><path d="M0 245h400M40 262 120 230M360 262 280 230M200 262v-32" stroke="#1A3A4A" stroke-width=".7"/>
+            <g fill="#0E1D33" stroke="#2f6a80" stroke-width=".6"><rect x="20" y="170" width="34" height="60"/><rect x="62" y="150" width="26" height="80"/><rect x="100" y="182" width="22" height="48"/><rect x="236" y="176" width="26" height="54"/><rect x="356" y="150" width="34" height="80"/></g>
+            <g transform="translate(70 0)"><circle cx="236" cy="78" r="46" fill="url(#g3)"/>
+            <rect x="216" y="92" width="40" height="138" fill="#10233a" stroke="#D4AF37" stroke-width=".9"/>
+            <rect x="222" y="66" width="28" height="26" fill="#10233a" stroke="#D4AF37" stroke-width=".9"/>
+            <path d="M236 66V40" stroke="#D4AF37"/>
+            <g fill="#ffcf86"><rect x="221" y="100" width="5" height="4"/><rect x="236" y="100" width="5" height="4" opacity=".6"/><rect x="246" y="112" width="5" height="4"/><rect x="221" y="124" width="5" height="4" opacity=".5"/><rect x="231" y="136" width="5" height="4"/><rect x="246" y="148" width="5" height="4" opacity=".7"/><rect x="226" y="160" width="5" height="4"/><rect x="241" y="172" width="5" height="4" opacity=".6"/><rect x="221" y="184" width="5" height="4"/><rect x="236" y="196" width="5" height="4"/><rect x="246" y="208" width="5" height="4" opacity=".6"/><rect x="228" y="74" width="5" height="4"/><rect x="239" y="80" width="5" height="4" opacity=".6"/></g>
+            <rect x="170" y="212" width="70" height="18" fill="#0d1828" stroke="#D4AF37" stroke-width=".7"/><rect x="198" y="218" width="12" height="12" fill="#ffcf86" opacity=".5"/></g>
+            <g fill="#F3DFA8"><circle cx="120" cy="90" r="1"/><circle cx="160" cy="130" r=".8"/><circle cx="300" cy="100" r="1.1"/><circle cx="330" cy="60" r=".7"/><circle cx="90" cy="60" r=".8"/><circle cx="270" cy="150" r=".9"/></g>
+          </svg>
+          <div class="t">Arabian Hills<small>CRAFTING DISTINCTIVE SPACES</small></div>
+          <div class="jb"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+        </div>
+      </a>
+      <div class="card__body">
+        <span class="card__num">Concept 03</span>
+        <h2>The Cinematic Journey</h2>
+        <p class="pos">An Apple-launch meets luxury-property-film experience. Scroll flies the camera from the raw site, around the tower and into the lobby.</p>
+        <div class="swatches">
+          <div class="sw"><i style="background:#0A1628"></i><b>Midnight</b><small>#0A1628</small></div>
+          <div class="sw"><i style="background:#D4AF37"></i><b>Liquid Gold</b><small>#D4AF37</small></div>
+          <div class="sw"><i style="background:#E8DCC4"></i><b>Soft Sand</b><small>#E8DCC4</small></div>
+          <div class="sw"><i style="background:#1A3A4A"></i><b>Deep Teal</b><small>#1A3A4A</small></div>
+        </div>
+        <div class="type"><span class="aa" style="font-family:'Cinzel',serif">Aa</span><p><b>Cinzel</b> regal display, gold gradient<br>Manrope for body copy</p></div>
+        <ul class="feats">
+          <li>Full Three.js scene: tower rises from the grid on load</li>
+          <li>Scroll-driven camera flight with pinned chapter panels</li>
+          <li>Floating 3D service cards, live 3D project thumbnails</li>
+          <li>Signature: Site → Tower → Lobby → Units → Contact bar</li>
+        </ul>
+        <div class="card__foot">
+          <a class="go" href="concept3.html" style="--c:#D4AF37;--ct:#0A1628">View Concept <span class="arr">→</span></a>
+          <span class="kbd"><kbd>3</kbd>shortcut</span>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ===================== COMPARISON ===================== -->
+  <section class="sec" aria-labelledby="cmp">
+    <div class="sec__h">
+      <h2 id="cmp">At a glance</h2>
+      <p>How the three directions compare on look, technology and delivery. Effort figures are indicative, for a typical 6–8 page corporate site.</p>
+    </div>
+    <div class="tbl-wrap" tabindex="0" aria-label="Comparison table — scrolls horizontally on small screens">
+      <table>
+        <thead>
+          <tr><th scope="col"><span class="micro">Criteria</span></th>
+            <th scope="col"><span class="n">01</span><b>Heritage Atelier</b></th>
+            <th scope="col"><span class="n">02</span><b>Contemporary Edge</b></th>
+            <th scope="col"><span class="n">03</span><b>Cinematic Journey</b></th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Style</th><td>Classic, timeless, editorial luxury. Symmetrical and centred.</td><td>Modern minimalist, architectural. Asymmetric with bold negative space.</td><td>Immersive and cinematic. Full-viewport, scroll-driven storytelling.</td></tr>
+          <tr><th scope="row">Colours</th>
+            <td><div class="chips"><i style="background:#F7F3EC"></i><i style="background:#B08D57"></i><i style="background:#2B2118"></i><i style="background:#D9C7A7"></i></div>Ivory, bronze gold, espresso, warm sand</td>
+            <td><div class="chips"><i style="background:#141414"></i><i style="background:#F2EFE9"></i><i style="background:#C9A961"></i><i style="background:#8A8A8A"></i></div>Charcoal, off-white, champagne, cool grey</td>
+            <td><div class="chips"><i style="background:#0A1628"></i><i style="background:#D4AF37"></i><i style="background:#E8DCC4"></i><i style="background:#1A3A4A"></i></div>Midnight navy, liquid gold, sand, deep teal</td></tr>
+          <tr><th scope="row">Typography</th><td><span class="ff1">Cormorant Garamond</span> + Jost</td><td><span class="ff2">Space Grotesk</span> + Inter</td><td><span class="ff3">Cinzel</span> + Manrope</td></tr>
+          <tr><th scope="row">Signature</th><td>Vertical gold progress rail with section markers</td><td>Custom gold cursor and self-drawing wireframe tower</td><td>Journey bar that lights up milestone by milestone</td></tr>
+          <tr><th scope="row">3D Level</th>
+            <td><span class="meter"><i class="on"></i><i></i><i></i><i></i><i></i></span>None. Parallax &amp; Ken Burns only</td>
+            <td><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>Hero wireframe, mouse-reactive</td>
+            <td><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>Full scene, camera flight, live thumbnails</td></tr>
+          <tr><th scope="row">Build Effort</th>
+            <td><span class="meter"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span>Low–medium · ~3–4 weeks</td>
+            <td><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>Medium · ~5–6 weeks</td>
+            <td><span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>High · ~8–10 weeks + 3D modelling of real projects</td></tr>
+          <tr><th scope="row">Performance</th><td>Lightest. Excellent on every device and connection.</td><td>Light. 3D is confined to the hero and pauses off-screen.</td><td>Heaviest. Phones automatically get a static cinematic fallback.</td></tr>
+          <tr><th scope="row">Best For</th><td>Conveying trust, heritage and stability to investors, families and institutional partners.</td><td>Positioning Arabian Hills as a design-led, forward-thinking developer for corporate tenants.</td><td>Flagship launches and campaign moments that need maximum “wow” and memorability.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===================== PRESENTER NOTES ===================== -->
+  <section class="sec" aria-labelledby="pn">
+    <div class="sec__h"><h2 id="pn">Presenting</h2><p>Each concept carries a floating badge and switcher (top-right) so you can move between them mid-meeting.</p></div>
+    <div class="notes">
+      <div class="note"><b>i.</b><h3>Go full-screen</h3><p>Press <code>F11</code> (Windows) or <code>Ctrl ⌘ F</code> (Mac) for a clean, chrome-free presentation.</p></div>
+      <div class="note"><b>ii.</b><h3>Jump with keys</h3><p>Press <code>1</code>, <code>2</code> or <code>3</code> to open a concept, and <code>0</code> to return to this overview.</p></div>
+      <div class="note"><b>iii.</b><h3>Scroll slowly in 03</h3><p>Concept 3 is a scroll-driven film. Use a mouse wheel or trackpad and pause at each chapter.</p></div>
+      <div class="note"><b>iv.</b><h3>Show the mobile view</h3><p>Resize the window, or append <code>?static=1</code> to Concept 3 to show its phone fallback.</p></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>© 2026 Arabian Hills Developers · A member of the Arabian Star Group</span>
+    <span class="m">Mockup — For design selection only</span>
+    <span>Imagery: Unsplash placeholders · Contact details are illustrative</span>
+  </footer>
+</div>
+
+<script>
+  /* Keyboard shortcuts: 1–3 open a concept. */
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var map = { '1': 'concept1.html', '2': 'concept2.html', '3': 'concept3.html' };
+    if (map[e.key]) location.href = map[e.key];
+  });
+</script>
+</body>
+</html>
